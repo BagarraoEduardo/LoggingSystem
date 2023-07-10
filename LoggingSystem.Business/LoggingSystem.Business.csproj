@@ -1,18 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\LoggingSystem.Business.Interfaces\LoggingSystem.Business.Interfaces.csproj" />
-    <ProjectReference Include="..\LoggingSystem.Business\LoggingSystem.Business.csproj" />
+    <ProjectReference Include="..\LoggingSystem.Models\LoggingSystem.Models.csproj" />
   </ItemGroup>
 
 </Project>
