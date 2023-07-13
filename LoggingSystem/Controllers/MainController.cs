@@ -31,6 +31,8 @@ namespace LoggingSystem.Controllers
             {
                 var logInfoResult = await _mainService.LogInfoExample();
 
+                _logger.LogError("teste");
+
                 response.Success = logInfoResult.Success;
                 response.ErrorMessage = logInfoResult.ErrorMessage;
             }
