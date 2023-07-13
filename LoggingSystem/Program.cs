@@ -1,36 +1,10 @@
 using LoggingSystem.Business;
 using LoggingSystem.Business.Interfaces;
-using Serilog.Events;
-using Serilog;
-using Microsoft.Data.SqlClient;
+using LoggingSystem.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Host.UseSerilog(new LoggerConfiguration()
-//       .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-//       .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-//       .MinimumLevel.Override("Microsoft.EntityFrameworkCore.Database.Command", LogEventLevel.Warning)
-//       .ReadFrom.Configuration(builder.Configuration)
-//       .CreateLogger());
-
-using (SqlConnection conn = new SqlConnection("Data Source=EDUARDOFILI83E3\\SQLEXPRESS;Initial Catalog=LogggingSystem; TrustServerCertificate=true; MultipleActiveResultSets=true; User Id=LoggingSystem; Password=LoggingSystem; Encrypt=false;")) 
-{
-    conn.Open(); // throws if invalid
-}
-
-//var configSettings = new ConfigurationBuilder()
-//        .AddJsonFile("appsettings.json")
-//        .Build();
-
-//Log.Logger = new LoggerConfiguration()
-//    .ReadFrom
-//    .Configuration(configSettings)
-//    .CreateLogger();
-
-//builder
-//    .Host
-//    .ConfigureAppConfiguration((builderContext, config) => config.AddConfiguration(configSettings))
-//    .ConfigureLogging(logging => logging.AddSerilog());
+builder.ConfigureLogging();
 
 // Add services to the container.
 

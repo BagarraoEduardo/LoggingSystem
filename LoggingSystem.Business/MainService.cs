@@ -23,8 +23,7 @@ namespace LoggingSystem.Business
             try
             {
                 _logger.LogInformation("This is a test information.");
-                _logger.LogWarning("This is a test information.");
-                _logger.LogError("This is a test information.");
+
                 response.Success = true;
             }
             catch (Exception exception) 

@@ -20,6 +20,9 @@ namespace LoggingSystem.Controllers
         }
 
         [HttpGet("LogInfoExample")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(LogInfoResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(LogInfoResponseDTO), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> LogInfoExample()
         {
             var response = new LogInfoResponseDTO()
@@ -27,16 +30,14 @@ namespace LoggingSystem.Controllers
                 Success = false
             };
 
-            try 
+            try
             {
                 var logInfoResult = await _mainService.LogInfoExample();
-
-                _logger.LogError("teste");
 
                 response.Success = logInfoResult.Success;
                 response.ErrorMessage = logInfoResult.ErrorMessage;
             }
-            catch (Exception exception) 
+            catch (Exception exception)
             {
                 _logger.LogError(exception, "An exception has ocurred.");
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
