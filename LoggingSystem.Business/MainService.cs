@@ -12,10 +12,32 @@ namespace LoggingSystem.Business
         {
             _logger = logger;
         }
-
-        public async Task<LogInfoResponse> LogInfoExample()
+        
+        public async Task<LogMessageResponse> LogExceptionExample()
         {
-            var response = new LogInfoResponse() 
+            var response = new LogMessageResponse()
+            {
+                Success = false
+            };
+
+            try
+            {
+                throw new Exception("This is an example exception.");
+
+                response.Success = true;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "An error has ocurred.");
+                response.ErrorMessage = exception.Message;
+            }
+
+            return response;
+        }
+
+        public async Task<LogMessageResponse> LogInfoExample()
+        {
+            var response = new LogMessageResponse() 
             {
                 Success = false
             };

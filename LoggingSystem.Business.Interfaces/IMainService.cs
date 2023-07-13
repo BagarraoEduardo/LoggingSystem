@@ -9,6 +9,7 @@ namespace LoggingSystem.Business.Interfaces
 {
     public interface IMainService
     {
-        Task<LogInfoResponse> LogInfoExample();
+        Task<LogMessageResponse> LogInfoExample();
+        Task<LogMessageResponse> LogExceptionExample();
     }
 }

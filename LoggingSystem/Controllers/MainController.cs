@@ -21,11 +21,11 @@ namespace LoggingSystem.Controllers
 
         [HttpGet("LogInfoExample")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(LogInfoResponseDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(LogInfoResponseDTO), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(LogMessageResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(LogMessageResponseDTO), StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> LogInfoExample()
         {
-            var response = new LogInfoResponseDTO()
+            var response = new LogMessageResponseDTO()
             {
                 Success = false
             };
@@ -33,6 +33,35 @@ namespace LoggingSystem.Controllers
             try
             {
                 var logInfoResult = await _mainService.LogInfoExample();
+
+                response.Success = logInfoResult.Success;
+                response.ErrorMessage = logInfoResult.ErrorMessage;
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception, "An exception has ocurred.");
+                return StatusCode(StatusCodes.Status500InternalServerError, response);
+            }
+
+            return Ok(response);
+        }
+
+
+
+        [HttpGet("LogExceptionExample")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(LogMessageResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(LogMessageResponseDTO), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> LogExceptionExample()
+        {
+            var response = new LogMessageResponseDTO()
+            {
+                Success = false
+            };
+
+            try
+            {
+                var logInfoResult = await _mainService.LogExceptionExample();
 
                 response.Success = logInfoResult.Success;
                 response.ErrorMessage = logInfoResult.ErrorMessage;
