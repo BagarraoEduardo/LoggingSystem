@@ -1,3 +1,4 @@
+using AutoMapper;
 using LoggingSystem.Business.Interfaces;
 using LoggingSystem.DTO;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +11,16 @@ namespace LoggingSystem.Controllers
     {
         private readonly ILogger<MainController> _logger;
         private readonly IMainService _mainService;
+        private readonly IMapper _mapper;
 
         public MainController(
-            ILogger<MainController> logger, 
-            IMainService mainService)
+            ILogger<MainController> logger,
+            IMainService mainService,
+            IMapper mapper)
         {
             _logger = logger;
             _mainService = mainService;
+            _mapper = mapper;
         }
 
         [HttpGet("LogInfoExample")]
@@ -32,10 +36,7 @@ namespace LoggingSystem.Controllers
 
             try
             {
-                var logInfoResult = await _mainService.LogInfoExample();
-
-                response.Success = logInfoResult.Success;
-                response.ErrorMessage = logInfoResult.ErrorMessage;
+                response = _mapper.Map<LogMessageResponseDTO>(await _mainService.LogInfoExample());
             }
             catch (Exception exception)
             {
@@ -61,10 +62,7 @@ namespace LoggingSystem.Controllers
 
             try
             {
-                var logInfoResult = await _mainService.LogExceptionExample();
-
-                response.Success = logInfoResult.Success;
-                response.ErrorMessage = logInfoResult.ErrorMessage;
+                response = _mapper.Map<LogMessageResponseDTO>(await _mainService.LogExceptionExample());
             }
             catch (Exception exception)
             {
